@@ -4,13 +4,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { TimeSelect } from "../components/TimeSelect";
 import PayNowButton from "../components/PayNowButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import dayjs from "dayjs";
 import { useSession } from "next-auth/react";
+import moment from "moment";
 
+// eslint-disable-next-line import/no-unused-modules
 export default function Home() {
   const [licenseplate, setLicensePlate] = useState("");
   const [make, setMake] = useState("");
@@ -18,7 +20,7 @@ export default function Home() {
   const [year, setYear] = useState(dayjs(null));
   const [color, setColor] = useState("");
 
-  const [timeSelect, setTimeSelect] = useState(0);
+  const [timeSelect, setTimeSelect] = useState("0");
   const [timeselectincrement, setTimeSelectIncrement] = useState("Minutes");
   const [step, setStep] = useState(0);
 
@@ -28,6 +30,10 @@ export default function Home() {
   const handleStep = (step: number) => () => {
     setStep(step);
   };
+
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
 
   if (session) {
     return (
@@ -120,7 +126,7 @@ export default function Home() {
               onClick={() => {
                 setStep(2);
               }}
-              disabled={timeSelect == 0}
+              disabled={String(timeSelect) == "0"}
             >
               Set Time
             </Button>
@@ -131,6 +137,27 @@ export default function Home() {
         <br />
         {step == 2 ? (
           <>
+            <Typography variant="h4">Your Parking Information</Typography>
+            <VehicleDetails
+              setLicensePlate={setLicensePlate}
+              setMake={setMake}
+              setModel={setModel}
+              setYear={setYear}
+              setColor={setColor}
+              licenseplate={licenseplate}
+              make={make}
+              model={model}
+              year={year}
+              color={color}
+              editMode={false}
+            ></VehicleDetails>
+            <p>Start Time: {moment().format("MM/DD/YYYY")}</p>
+            <p>
+              End Time:
+              {moment().format("MM/DD/YYYY")}
+            </p>
+
+            <br />
             <Typography variant="h5">How do you want to pay?</Typography>
 
             <div style={{ margin: "auto", width: "100%" }}>

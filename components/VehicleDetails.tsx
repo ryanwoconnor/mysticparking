@@ -9,7 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
-type Props = {
+interface Props {
   setLicensePlate: (model: string) => void;
   setMake: (model: string) => void;
   setModel: (model: string) => void;
@@ -21,7 +21,7 @@ type Props = {
   model: string;
   year: Dayjs;
   color: string;
-};
+}
 
 export const VehicleDetails: FunctionComponent<Props> = ({
   setLicensePlate,
@@ -41,6 +41,7 @@ export const VehicleDetails: FunctionComponent<Props> = ({
       <>
         <TextField
           required
+          tabIndex={0}
           fullWidth
           label="Make"
           variant="standard"
@@ -50,6 +51,7 @@ export const VehicleDetails: FunctionComponent<Props> = ({
         <br />
         <TextField
           required
+          tabIndex={1}
           fullWidth
           label="Model"
           variant="standard"
@@ -58,7 +60,7 @@ export const VehicleDetails: FunctionComponent<Props> = ({
         />
         <br />
         <br />
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%" }} tabIndex={2}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               views={["year"]}
@@ -80,6 +82,7 @@ export const VehicleDetails: FunctionComponent<Props> = ({
         <FormControl fullWidth>
           <InputLabel id="color-select-label">Color</InputLabel>
           <Select
+            tabIndex={3}
             labelId="color-select-label"
             value={color}
             required
@@ -104,6 +107,7 @@ export const VehicleDetails: FunctionComponent<Props> = ({
         <br />
         <TextField
           required
+          tabIndex={4}
           label="License Plate"
           variant="standard"
           fullWidth

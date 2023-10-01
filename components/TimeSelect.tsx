@@ -6,8 +6,8 @@ import { TextField } from "@mui/material";
 type Props = {
   timeselectincrement: string;
   setTimeSelectIncrement: (increment: string) => void;
-  timeSelect: number;
-  setTimeSelect: (time: number) => void;
+  timeSelect: string;
+  setTimeSelect: (time: string) => void;
 };
 
 export const TimeSelect: FunctionComponent<Props> = ({
@@ -22,7 +22,7 @@ export const TimeSelect: FunctionComponent<Props> = ({
         type="number"
         value={timeSelect}
         onChange={(e) => {
-          setTimeSelect(Number(e.target.value));
+          setTimeSelect(String(e.target.value));
         }}
       />
 

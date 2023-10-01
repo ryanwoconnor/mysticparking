@@ -7,9 +7,9 @@ export default withAuth(
     const env = process.env.NODE_ENV;
     var newURL = "";
     if (env == "development") {
-      newURL = "https://cleanersharegateway-dev-9z8b9j4o.uk.gateway.dev";
+      newURL = "https://mysticparkinggateway-dev-9z8b9j4o.uk.gateway.dev";
     } else if (env == "production") {
-      newURL = "https://cleanersharegateway-9z8b9j4o.uk.gateway.dev";
+      newURL = "https://mysticparkinggateway-9z8b9j4o.uk.gateway.dev";
     }
 
     const session = await getToken({
@@ -34,7 +34,7 @@ export default withAuth(
           );
         } else if (env == "production") {
           return NextResponse.rewrite(
-            new URL("https://cleanershare.com" + "/auth/signin")
+            new URL("https://mysticparking.space" + "/auth/signin")
           );
         }
       }

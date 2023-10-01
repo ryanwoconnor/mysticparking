@@ -4,17 +4,13 @@ import {
   getCsrfToken,
   getSession,
 } from "next-auth/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
-const Typography = dynamic(() => import("@mui/material/Typography"), {});
 const Grid = dynamic(() => import("@mui/material/Grid"), {});
 
 const Button = dynamic(() => import("@mui/material/Button"), {});
-
-const TextField = dynamic(() => import("@mui/material/TextField"), {});
 
 const GoogleIcon = (
   <svg
@@ -44,98 +40,7 @@ const GoogleIcon = (
 );
 
 export default function Signin({ providers }) {
-  const handleKeyPress = (e) => {
-    if (e.keyCode === 13) {
-      loginButton(e);
-    } else {
-      setUserPassword(e.target.value);
-    }
-  };
-
-  const router = useRouter();
-  const [error, setError] = useState(null);
-  const [isSigningIn, setIsSigningIn] = useState(false);
-  const [showSignInType, setShowSignInType] = useState("google");
-  const [showConfirmationEmail, setShowConfirmationEmail] = useState(false);
-  const [showEmailVerified, setShowEmailVerified] = useState(false);
-  const [showEmailVerifiedFailure, setShowEmailVerifiedFailure] =
-    useState(false);
-
-  const [showResetModal, setShowResetModal] = useState(false);
-
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-
-  const [redirectUrl, setRedirectUrl] = useState("/");
-
-  const handleModalClose = () => {
-    setShowConfirmationEmail(false);
-    setShowResetModal(false);
-    setShowSignInType("newemail");
-    setIsSigningIn(false);
-  };
-
-  const handleResetModalClose = () => {
-    setShowConfirmationEmail(false);
-    setShowResetModal(false);
-    setShowSignInType("existingemail");
-    setIsSigningIn(false);
-  };
-
-  useEffect(() => {
-    if (typeof router.query.callbackUrl != "undefined") {
-      setRedirectUrl(router.query.callbackUrl);
-    }
-
-    if (router.query.verification == "success") {
-      setShowEmailVerified(true);
-    }
-
-    if (router.query.verification == "failure") {
-      setShowEmailVerifiedFailure(true);
-    }
-
-    if (router.query.auth == "cleanershare") {
-      setShowSignInType("existingemail");
-    }
-  }, [router]);
-
-  const loginButton = async (values) => {
-    values.preventDefault();
-    setIsSigningIn(true);
-    setError(null);
-
-    try {
-      await signIn("credentials", {
-        redirect: false,
-        username: userEmail,
-        password: userPassword,
-        callbackUrl: `${redirectUrl}`,
-      })
-        .then((response) => {
-          if (typeof response.ok != "undefined") {
-            if (response.ok) {
-              setError(null);
-              router.push(redirectUrl);
-              return response;
-            } else {
-              console.log("RESPONSE IS AN ERROR");
-              throw new Error({ message: "Invalid Username or Password" });
-            }
-          } else {
-            console.log("RESPONSE IS AN ERROR");
-            throw new Error({ message: "Invalid Username or Password" });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          setIsSigningIn(false);
-          setError(true);
-        });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const [showSignInType] = useState("google");
 
   return (
     <Grid
@@ -155,11 +60,7 @@ export default function Signin({ providers }) {
         xs={3}
       >
         <h1>Welcome to Mystic Parking</h1>
-        {showEmailVerifiedFailure ? (
-          <ErrorMessageComponent message="Email has not been verified. Please click the link we sent you in your email to verify your account." />
-        ) : (
-          <></>
-        )}
+
         {showSignInType == "google" ? (
           <>
             {Object.values(providers).map((provider, value) => {
@@ -186,18 +87,6 @@ export default function Signin({ providers }) {
                     ) : (
                       <></>
                     )}
-                    {provider.id == "email" ? (
-                      <>
-                        <EmailSignInButton
-                          width="100%"
-                          id="signinwithcleanershare"
-                          message="Sign-in with Cleanershare"
-                          onClick={() => setShowSignInType("existingemail")}
-                        />
-                      </>
-                    ) : (
-                      <></>
-                    )}
                   </div>
                 </div>
               );
@@ -206,198 +95,7 @@ export default function Signin({ providers }) {
         ) : (
           <></>
         )}
-        {showSignInType == "existingemail" ? (
-          <>
-            {showEmailVerified ? (
-              <Success message="Email successfully verified. Please sign in to continue." />
-            ) : (
-              <></>
-            )}
-            {isSigningIn ? <Loading message="Signing in..." /> : <></>}{" "}
-            {error ? (
-              <div>
-                <ErrorMessageComponent message="Please check your username/password, and ensure you have verified your email address." />
-              </div>
-            ) : (
-              <></>
-            )}
-            {!isSigningIn ? (
-              <>
-                <Typography fullWidth={true} align="center" variant="h6">
-                  Sign in with your Cleanershare Account
-                </Typography>
-                <br />
-                <TextField
-                  type="text"
-                  id="email"
-                  label="Email"
-                  name="email"
-                  fullWidth={true}
-                  width="100%"
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                />
-                <br />
-                <br />
-                <TextField
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={userPassword}
-                  fullWidth={true}
-                  width="100%"
-                  label="Password"
-                  onChange={(e) => setUserPassword(e.target.value)}
-                  onKeyDown={(e) => {
-                    handleKeyPress(e);
-                  }}
-                />
-                <br /> <br />
-                <Button
-                  variant="contained"
-                  id="loginemailbutton"
-                  onClick={async (values) => {
-                    loginButton(values);
-                  }}
-                  fullWidth={true}
-                  align="center"
-                >
-                  Login
-                </Button>{" "}
-              </>
-            ) : (
-              <></>
-            )}
-            <br />
-            <br />
-            <Button
-              variant="contained"
-              color="secondary"
-              href=""
-              onClick={(e) => {
-                e.preventDefault();
-                setShowSignInType("forgotpassword");
-              }}
-              fullWidth={true}
-              align="center"
-            >
-              Forgot Password?
-            </Button>
-            <br />
-            <br />
-            <hr />
-            <Typography fullWidth={true} align="center" variant="body1">
-              {" "}
-              Don&apos;t have a Cleanershare Account?
-            </Typography>
-            <br />
-            <div>
-              <Button
-                data-cy="GoogleButton"
-                variant="outlined"
-                onClick={() =>
-                  signIn("google", {
-                    redirect: false,
-                  })
-                }
-                startIcon={GoogleIcon}
-                fullWidth={true}
-              >
-                Continue with Google
-              </Button>
-            </div>
-            <br />
-            <div>
-              <EmailSignInButton
-                id="newuserbutton"
-                message="New&nbsp;Cleanershare&nbsp;Account"
-                onClick={(e) => {
-                  e.preventDefault();
 
-                  router.replace("/auth/signin", undefined, {
-                    shallow: true,
-                  });
-
-                  setShowSignInType("newemail");
-                }}
-              />
-            </div>
-            <br />
-          </>
-        ) : (
-          <></>
-        )}
-        {showSignInType == "newemail" ? (
-          <>
-            {" "}
-            <SignUpForm setShowSignInType={setShowSignInType} />
-          </>
-        ) : (
-          <></>
-        )}
-
-        {showSignInType == "forgotpassword" ? (
-          <>
-            <TextField
-              type="text"
-              id="email"
-              label="Email"
-              name="email"
-              fullWidth={true}
-              width="100%"
-              onChange={(e) => {
-                setUserEmail(e.target.value);
-              }}
-            />
-
-            <br />
-            <br />
-            <div>
-              <Button
-                variant="contained"
-                type="submit"
-                onClick={async (e) => {
-                  e.preventDefault();
-                  setError(null);
-
-                  fetch("/api/forgotPassword", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: JSON.stringify({
-                      username: userEmail,
-                    }),
-                  })
-                    .then((response) => {
-                      return response.json();
-                    })
-                    .then(() => {});
-
-                  if (error) {
-                    throw new Error(error);
-                  }
-                  setShowResetModal(true);
-                }}
-              >
-                {" "}
-                Reset Password
-              </Button>
-              <br /> <br />
-              <Button
-                variant="contained"
-                color="secondary"
-                id="signinwithemail"
-                onClick={() => setShowSignInType("existingemail")}
-              >
-                {"< "}Return to Sign-in
-              </Button>
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
         <br />
       </Grid>
     </Grid>

@@ -25,8 +25,6 @@ export default function Home() {
   const steps = ["Add Vehicle", "Choose Time", "Pay"];
   const { data: session } = useSession();
 
-  console.log(session);
-
   const handleStep = (step: number) => () => {
     setStep(step);
   };

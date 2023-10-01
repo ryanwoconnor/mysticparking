@@ -214,6 +214,8 @@ export default withAuth(
       authorized: ({ req, token }) => {
         const path = req.nextUrl.pathname;
 
+        console.log(path);
+        console.log(token);
         //Pages below this line can be used by only hosts.
         if (token) {
           return true;

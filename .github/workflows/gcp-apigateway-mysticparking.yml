@@ -4,10 +4,10 @@ on:
     branches:
       - main
     paths:
-      - "gcp/apigateway/mysticparking/openapispec.yaml"
+      - "gcp/apigateway/mystic-parking/openapispec.yaml"
 
 jobs:
-  deploy-apigateway-mysticparking:
+  deploy-apigateway-mystic-parking:
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
@@ -30,9 +30,9 @@ jobs:
           api-gateway
           api-configs
           create
-          mysticparking-config-${{ steps.date.outputs.date }}
-          --api=mysticparking
-          --openapi-spec=gcp/apigateway/mysticparking/openapispec.yaml
+          mystic-parking-config-${{ steps.date.outputs.date }}
+          --api=mystic-parking
+          --openapi-spec=gcp/apigateway/mystic-parking/openapispec.yaml
           --project=twin-villas
       - id: "deploy_config"
         run: >
@@ -40,8 +40,8 @@ jobs:
           api-gateway
           gateways
           update
-          mysticparkinggateway
-          --api=mysticparking
-          --api-config=mysticparking-config-${{ steps.date.outputs.date }}
+          mystic-parkinggateway
+          --api=mystic-parking
+          --api-config=mystic-parking-config-${{ steps.date.outputs.date }}
           --location=us-east4
           --project=twin-villas

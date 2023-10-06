@@ -7,7 +7,7 @@ on:
       - "gcp/artifactregistry/delete_policy.json"
 
 jobs:
-  deploy-artifactregistry-cleanershare:
+  deploy-artifactregistry-mystic-parking:
     runs-on: ubuntu-latest
     steps:
       - name: Get current date

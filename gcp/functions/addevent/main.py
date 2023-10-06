@@ -230,7 +230,7 @@ def getEvents(request):
                                 + str(checkout.day)
                                 + "/"
                                 + str(checkout.year)
-                                + ". More info: https://mysticparking.com/?uid="
+                                + ". More info: https://mysticparking.space/?uid="
                                 + new_uuid,
                                 headers={"Authorization": "Bearer " + id_token, "Content-Type": "application/json"},
                             )
@@ -250,7 +250,7 @@ def getEvents(request):
                                 + str(checkout.day)
                                 + "/"
                                 + str(checkout.year)
-                                + ". More info: https://mysticparking.com/?uid="
+                                + ". More info: https://mysticparking.space/?uid="
                                 + new_uuid,
                                 headers={"Authorization": "Bearer " + id_token, "Content-Type": "application/json"},
                             )

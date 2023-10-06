@@ -1,0 +1,589 @@
+indexes:
+  # This index is used for projection queries on cleaners api to be able to filter on archivedd listings
+  - kind: cleanerid
+    properties:
+      - name: archived
+      - name: cleaner_text_assigned_confirmation
+      - name: cleaneremail
+      - name: cleanerhourlyrate
+      - name: cleanername
+      - name: cleanerpaymenttype
+      - name: firstname
+      - name: hostemail
+      - name: id
+      - name: lastUpdateTime
+      - name: lastname
+      - name: listingid
+      - name: phonenum
+      - name: uid
+
+  - kind: cleanerid
+    properties:
+      - name: cleaneremail
+      - name: listingid
+      - name: archived
+      - name: cleaner_text_assigned_confirmation
+      - name: cleanerhourlyrate
+      - name: cleanername
+      - name: cleanerpaymenttype
+      - name: firstname
+      - name: hostemail
+      - name: id
+      - name: lastUpdateTime
+      - name: lastname
+      - name: phonenum
+      - name: uid
+
+  # Added 9/1/2023 so that we can pull only primary cleaners
+  - kind: cleanerid
+    properties:
+      - name: usertype
+      - name: archived
+      - name: cleaner_text_assigned_confirmation
+      - name: cleaneremail
+      - name: cleanerhourlyrate
+      - name: cleanername
+      - name: cleanerpaymenttype
+      - name: firstname
+      - name: lastUpdateTime
+      - name: lastname
+      - name: phonenum
+      - name: uid
+
+  - kind: cleanerid
+    properties:
+      - name: usertype
+      - name: archived
+      - name: available
+      - name: cleaner_text_assigned_confirmation
+      - name: cleaneremail
+      - name: cleanerhourlyrate
+      - name: cleanername
+      - name: cleanerpaymenttype
+      - name: firstname
+      - name: lastUpdateTime
+      - name: lastname
+      - name: phonenum
+      - name: signUpDate
+      - name: uid
+      - name: zipcode
+
+  # Used to find the primary user by an email
+  - kind: cleanerid
+    properties:
+      - name: cleaneremail
+      - name: usertype
+      - name: archived
+      - name: cleaner_text_assigned_confirmation
+      - name: cleanerhourlyrate
+      - name: cleanername
+      - name: cleanerpaymenttype
+      - name: firstname
+      - name: lastUpdateTime
+      - name: lastname
+      - name: phonenum
+      - name: uid
+
+  - kind: cleanerid
+    properties:
+      - name: uid
+      - name: archived
+      - name: cleaner_text_assigned_confirmation
+      - name: cleaneremail
+      - name: cleanerhourlyrate
+      - name: cleanername
+      - name: cleanerpaymenttype
+      - name: firstname
+      - name: hostemail
+      - name: id
+      - name: lastUpdateTime
+      - name: lastname
+      - name: listingid
+      - name: phonenum
+
+    # This index is used for projection queries on cleaners api to be able to filter on archivedd listings
+  - kind: cleanerid
+    properties:
+      - name: cleaneremail
+      - name: archived
+      - name: cleaner_text_assigned_confirmation
+      - name: cleanerhourlyrate
+      - name: cleanername
+      - name: cleanerpaymenttype
+      - name: firstname
+      - name: hostemail
+      - name: id
+      - name: lastUpdateTime
+      - name: lastname
+      - name: listingid
+      - name: phonenum
+      - name: uid
+
+  - kind: cleanerid
+    properties:
+      - name: archived
+      - name: listingid
+      - name: cleaner_text_assigned_confirmation
+      - name: cleaneremail
+      - name: cleanerhourlyrate
+      - name: cleanername
+      - name: cleanerpaymenttype
+      - name: firstname
+      - name: hostemail
+      - name: id
+      - name: lastUpdateTime
+      - name: lastname
+      - name: phonenum
+      - name: uid
+  # This index is used for projection queries on cleaners api to only returncleaneremail
+  - kind: cleanerid
+    properties:
+      - name: cleaneremail
+      - name: uid
+
+  # This index is used for projection queries on host api to only returncleaneremail
+  - kind: hostid
+    properties:
+      - name: hostemail
+      - name: uid
+
+  # This index is used for projection queries on host api to only returncleaneremail
+  - kind: hostid
+    properties:
+      - name: hostemail
+      - name: listingid
+      - name: uid
+  # This is used in the addevent function.
+  - kind: hostid
+    properties:
+      - name: hostemail
+      - name: phonenum
+      - name: uid
+
+  # This is used in the update function.
+  - kind: hostid
+    properties:
+      - name: hostemail
+      - name: phonenum
+
+  - kind: cohostid
+    properties:
+      - name: cohostemail
+      - name: uid
+
+  - kind: cohostid
+    properties:
+      - name: hostemail
+      - name: listingid
+      - name: uid
+
+  # This is used in the update function.
+  - kind: cohostid
+    properties:
+      - name: listingid
+      - name: "cohostemail"
+      - name: phonenum
+
+  # This is used in the addevent function.
+  - kind: cohostid
+    properties:
+      - name: listingid
+      - name: phonenum
+      - name: uid
+
+  # This is used in the addevent function.
+  - kind: cohostid
+    properties:
+      - name: listingid
+      - name: phonenum
+      - name: uid
+
+  - kind: cohostid
+    properties:
+      - name: cohostemail
+      - name: hostemail
+      - name: listingid
+      - name: uid
+
+  - kind: cohostid
+    properties:
+      - name: cohostemail
+      - name: listingid
+      - name: uid
+
+  - kind: cleanerid
+    properties:
+      - name: cleaneremail
+      - name: hostemail
+      - name: listingid
+      - name: uid
+
+  #Index for returnCleanerByID function in updateevent API Endpoint
+  - kind: cleanerid
+    properties:
+      - name: uid
+      - name: cleaner_text_assigned_confirmation
+      - name: phonenum
+
+  - kind: cleanerid
+    properties:
+      - name: cleaneremail
+      - name: listingid
+      - name: uid
+
+  - kind: cleanerid
+    properties:
+      - name: hostemail
+      - name: listingid
+      - name: uid
+
+  # This index is used for projection queries on listings api to be able to filter on archivedd listings
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: hostemail
+      - name: access_instructions
+      - name: address
+      - name: cleaningfee
+      - name: hash
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listing
+      - name: listingid
+      - name: name
+      - name: airbnburl
+
+  # This index is used for projection queries on listings api to be able to filter on archivedd listings
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: hostemail
+      - name: access_instructions
+      - name: address
+      - name: cleaningfee
+      - name: hash
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listing
+      - name: listingid
+      - name: name
+      - name: airbnburl
+      - name: short_description
+
+  # This index is used for projection queries to determine active users in a timeframe
+  - kind: websiteauditid
+    properties:
+      - name: date
+      - name: email
+
+  # This index is used for projection queries on listings api
+  - kind: listingid
+    properties:
+      - name: hostemail
+      - name: access_instructions
+      - name: address
+      - name: cleaningfee
+      - name: hash
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listing
+      - name: listingid
+      - name: name
+      - name: airbnburl
+
+    # This index is used for projection queries on listings api
+  - kind: listingid
+    properties:
+      - name: hostemail
+      - name: access_instructions
+      - name: address
+      - name: cleaningfee
+      - name: hash
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listing
+      - name: listingid
+      - name: name
+      - name: airbnburl
+      - name: short_description
+
+  - kind: listingid
+    properties:
+      - name: hostemail
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: airbnburl
+      - name: cleaningfee
+      - name: hash
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listingid
+      - name: name
+
+  - kind: listingid
+    properties:
+      - name: hostemail
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: airbnburl
+      - name: cleaningfee
+      - name: hash
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listingid
+      - name: name
+      - name: short_description
+
+  - kind: listingid
+    properties:
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: airbnburl
+      - name: cleaningfee
+      - name: hash
+      - name: hostemail
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listingid
+      - name: name
+
+  - kind: listingid
+    properties:
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: airbnburl
+      - name: cleaningfee
+      - name: hash
+      - name: hostemail
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listingid
+      - name: name
+      - name: short_description
+
+  #This is used to filter listings with a specific listing in return listings
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: hostemail
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: airbnburl
+      - name: cleaningfee
+      - name: hash
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listingid
+      - name: name
+
+  #This is used to filter listings with a specific listing in return listings
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: hostemail
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: airbnburl
+      - name: cleaningfee
+      - name: hash
+      - name: hostid
+      - name: id
+      - name: lastUpdateCheck
+      - name: lastUpdateTime
+      - name: listingid
+      - name: name
+      - name: short_description
+
+  #Index for retrieving listings if you're a cleaner
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: hostemail
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: cleaningfee
+      - name: id
+      - name: listingid
+      - name: name
+
+  #Index for retrieving listings if you're a cleaner
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: hostemail
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: cleaningfee
+      - name: id
+      - name: listingid
+      - name: name
+      - name: short_description
+
+    #Index for retrieving listings if you're a cleaner
+  - kind: listingid
+    properties:
+      - name: hostemail
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: cleaningfee
+      - name: id
+      - name: listingid
+      - name: name
+
+    #Index for retrieving listings if you're a cleaner
+  - kind: listingid
+    properties:
+      - name: hostemail
+      - name: listing
+      - name: access_instructions
+      - name: address
+      - name: cleaningfee
+      - name: id
+      - name: listingid
+      - name: name
+      - name: short_description
+
+  # This index is used for projection queries on listings api
+  - kind: reservationid
+    properties:
+      - name: airbnbconfirmationcode
+      - name: backfill
+      - name: booked
+      - name: bookingstatus
+      - name: calendar_type
+      - name: canceled
+      - name: canceledBy
+      - name: cancelled
+      - name: cleaneramountpaid
+      - name: cleanerconfirmationdate
+      - name: cleanerconfirmationstatus
+      - name: cleaneremail
+      - name: cleanerhours
+      - name: cleanerid
+      - name: cleanername
+      - name: cleanerpaid
+      - name: cleanerpaidpaymentdate
+      - name: cleanerpaidpaymenttype
+      - name: cleanerrequestedtime
+      - name: cleaning_date
+      - name: cleaning_day_of_week
+      - name: count_adults
+      - name: count_children
+      - name: count_infants
+      - name: count_nights
+      - name: created_date
+      - name: description
+      - name: earnings
+      - name: end_date
+      - name: guestname
+      - name: lastUpdateTime
+      - name: listing
+      - name: listingid
+      - name: manuallyconfirmedby
+      - name: notes
+      - name: phonenum
+      - name: pin
+      - name: start_date
+      - name: status
+      - name: summary
+      - name: uid
+      - name: updated
+
+  - kind: listingid
+    properties:
+      - name: listing
+      - name: hostemail
+
+  - kind: listingid
+    properties:
+      - name: listing
+      - name: hostemail
+      - name: archive
+
+  - kind: reading
+    properties:
+      - name: deviceID
+      - name: readingTime
+
+  - kind: reservationid
+    properties:
+      - name: listing
+      - name: cleaning_date
+
+  #Added 08/15/2023 - for filtering on lastUpdateTime
+  - kind: reservationid
+    properties:
+      - name: listing
+      - name: lastUpdateTime
+
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: events.cleaning_date
+
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: events.uid
+
+  - kind: listingid
+    properties:
+      - name: archive
+      - name: events.airbnbconfirmationcode
+
+  - kind: listingid
+    properties:
+      - name: events.cleaneremail
+      - name: events.cleaning_date
+
+  - kind: reservationid
+    properties:
+      - name: airbnbconfirmationcode
+      - name: cleaning_date
+
+  - kind: reservationid
+    properties:
+      - name: listing
+      - name: cleaning_date
+
+  - kind: reservationid
+    properties:
+      - name: cleaneremail
+      - name: cleaning_date
+
+  - kind: reservationid
+    properties:
+      - name: cleanerid
+      - name: cleaning_date
+
+  - kind: reservationid
+    properties:
+      - name: uid
+      - name: cleaning_date

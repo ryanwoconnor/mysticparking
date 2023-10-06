@@ -1,0 +1,460 @@
+swagger: "2.0"
+info:
+  title: Mystic Parking API
+  version: "1.0"
+schemes:
+  - https
+security:
+  - google_id_token: []
+  - firebase: []
+
+definitions:
+  Reservation:
+    type: object
+    properties:
+      airbnbconfirmationcode:
+        example: "HMQFHTRQ2T"
+        type: string
+        description: UID of Reservation
+      backfill:
+        example: "false"
+        type: string
+        description: Whether this was a backfilled event
+      booked:
+        example: "2022-08-16 17:30:02+00:00"
+        type: string
+        description: Time of Booking
+      bookingstatus:
+        example: "Reserved"
+        type: string
+        description: Reservation Status
+      calendar_type:
+        example: "airbnb"
+        type: string
+        description: Type of Calendar
+      cancelled:
+        example: ""
+        type: string
+        description: Whether this is cancelled or not
+      cleaneremail:
+        example: ""
+        type: string
+        description: Email of Cleaner
+      cleanerid:
+        example: "e1f712ba-0709-11ed-bade-691afd329190"
+        type: string
+        description: UID of Cleaner
+      cleanername:
+        example: "Arlene"
+        type: string
+        description: Cleaner Name
+      cleanerpaid:
+        example: "false"
+        type: string
+        description: Bool for Cleaner is Paid
+      cleanerpaidpaymentdate:
+        example: ""
+        type: string
+        description: Date of Payment of Cleaner
+      cleanerpaidpaymenttype:
+        example: ""
+        type: string
+        description: Type of Payment for Cleaner (venmo/cash/check)
+      cleaning_date:
+        example: "2022-10-23 05:00:00+00:00"
+        type: string
+        description: Date of Cleaning. Normally this is the same as the end date, but sometimes we change it.
+      count_adults:
+        example: 0
+        type: integer
+        description: Number of Adults
+      count_children:
+        example: 0
+        type: integer
+        description: Number of Children
+      count_infants:
+        example: 1
+        type: integer
+        description: Number of Infants
+      count_nights:
+        example: 1
+        type: integer
+        description: Number of Nights of Reservation
+      created_date:
+        example: "2022-08-16 17:30:02+00:00"
+        type: string
+        description: Date Reservation was Created
+      description:
+        example: ""
+        type: string
+        description: Description
+      earnings:
+        example: ""
+        type: string
+        description: Earnings of Reservation
+      end_date:
+        example: "2022-10-23 05:00:00+00:00"
+        type: string
+        description: End date of reservation
+      guestname:
+        example: ""
+        type: string
+        description: Guest name
+      lastUpdateTime:
+        example: "2022-10-14 11:59:20+00:00"
+        type: string
+        description: Last Update Time of Reservation
+      listing:
+        example: "Beebe Cove BnB"
+        type: string
+        description: Listing Name
+      listingid:
+        example: "beebebnb"
+        type: string
+        description: Listing ID
+      notes:
+        example: []
+        type: string
+        description: Notes for Reservation
+      phonenum:
+        example: ""
+        type: string
+        description: Phone Number
+      pin:
+        example: ""
+        type: string
+        description: Door Code for Reservation
+      start_date:
+        example: "2022-10-21 05:00:00+00:00"
+        type: string
+        description: Start Date
+      status:
+        example: ""
+        type: string
+        description: Status of Reservation
+      summary:
+        example: ""
+        type: string
+        description: Summary
+      uid:
+        example: ""
+        type: string
+        description: UID of Reservation
+      updated:
+        example: "2022-10-14 11:59:22+00:00"
+        type: string
+        description: Last Update
+
+securityDefinitions:
+  firebase:
+    flow: implicit
+    authorizationUrl: ""
+    scopes: {}
+    type: oauth2
+    x-google-issuer: "https://securetoken.google.com/mysticparking"
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+    x-google-audiences: "mysticparkng"
+  google_id_token:
+    authorizationUrl: ""
+    flow: implicit
+    type: oauth2
+    x-google-issuer: https://accounts.google.com
+    x-google-jwks_uri: https://www.googleapis.com/oauth2/v3/certs
+    # Optional. Replace YOUR-CLIENT-ID with your client ID
+    x-google-audiences: 781967508504-2h6j1ccbhhpb28qdk0bggng3a4jqm9nb.apps.googleusercontent.com
+tags:
+  - name: Reservation Management
+    description: Everything for managing reservations
+
+paths:
+  /reservation:
+    #Get a reservation.
+    get:
+      tags:
+        - Reservation Management
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+            properties:
+              tasks:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    access_instructions:
+                      type: string
+                      example: "This is how you get into the house"
+                    address:
+                      type: string
+                      example: "123 Fake Street, Town, State, 435632"
+                    archive:
+                      type: boolean
+                      example: false
+                    hash:
+                      type: string
+                      example: "e5a8dab83c27539280ed7452d9772c01"
+                    hostemail:
+                      type: string
+                      description: Email of Host
+                      example: "test.user@gmail.com"
+                    hostid:
+                      type: string
+                      description: Unique ID of Host
+                      example: "071ad098-07c0-11ed-87a1-ddbec0da1d5c"
+                    lastUpdateCheck:
+                      type: string
+                      description: Last Time Listing Was Updated
+                      example: "Wed, 19 Oct 2022 00:00:03 GMT"
+                    lastUpdateTime:
+                      type: string
+                      description: Last Time Listing Was Updated
+                      example: "Wed, 19 Oct 2022 00:00:03 GMT"
+                    id:
+                      type: string
+                      example: "beebebnb"
+                    listingid:
+                      type: string
+                      example: "beebebnb"
+                    listing:
+                      type: string
+                      example: "Beebe Cove BnB"
+                    name:
+                      type: string
+                      example: "Beebe Cove BnB"
+                    events:
+                      type: array
+                      items:
+                        $ref: "#/definitions/Reservation"
+                    url:
+                      type: string
+                      description: URL For Listing
+                      example: "https://www.airbnb.com/calendar/ical/47747ssfsgsg547.ics?s=ec931ssfsgdc211cfe74da783861f670e1c8a"
+      parameters:
+        - in: query
+          name: includearchive
+          type: string
+          required: false
+          description: Filter archived listings (true)
+        - in: query
+          name: timefilter
+          type: string
+          required: true
+          description: Filter the time of events (alltime, aftertoday, last10years)
+        - in: query
+          name: uid
+          type: string
+          required: false
+          description: Reservation ID
+        - in: query
+          name: cleaneremail
+          type: string
+          required: false
+          description: Email Address for Cleaner
+        - in: query
+          name: cleanerid
+          type: string
+          required: false
+          description: Cleaner ID
+      summary: Get reservation(s).
+      description: >
+        This operation will get reservation(s).
+      operationId: getReservation
+      x-google-backend:
+        address: https://returnevents-xmr67kfgoa-uk.a.run.app
+    #Update a reservation
+    post:
+      tags:
+        - Reservation Management
+      responses:
+        "200":
+          description: OK
+      parameters:
+        - in: query
+          name: cleanerconfirmationstatus
+          type: string
+          required: false
+          description: Status of Cleaner for Reservation (Pending or Confirmed)
+        - in: query
+          name: uid
+          type: string
+          required: true
+          description: Reservation ID
+        - in: query
+          name: cleanerid
+          type: string
+          required: false
+          description: Cleaner ID
+        - in: query
+          name: cleanername
+          type: string
+          required: false
+          description: Cleaner Name
+        - in: query
+          name: cleaneremail
+          type: string
+          required: true
+          description: Cleaner Email Address
+        - in: query
+          name: pin
+          type: string
+          required: false
+          description: Access Pin
+        - in: query
+          name: cleanerpaid
+          type: string
+          required: false
+          description: Cleaner Paid (true)
+        - in: query
+          name: guestname
+          type: string
+          required: true
+          description: Guest Name
+        - in: query
+          name: phonenum
+          type: string
+          required: false
+          description: Phone Number
+        - in: query
+          name: cleanerpaidpaymenttype
+          type: string
+          required: false
+          description: Cleaner Payment Type (cash/check/venmo)
+        - in: query
+          name: cleaning_date
+          type: string
+          required: false
+          description: Cleaning Date
+        - in: query
+          name: cleanerhours
+          type: string
+          required: false
+          description: Cleaning Hours
+
+      summary: Update a reservation.
+      description: >
+        This operation will update a reservation.
+      operationId: updateReservation
+      x-google-backend:
+        address: https://updateevent-xmr67kfgoa-uk.a.run.app
+    #Add a reservation
+    put:
+      tags:
+        - Reservation Management
+      responses:
+        "200":
+          description: OK
+      parameters:
+        - in: query
+          name: email
+          type: string
+          required: true
+          description: Email Address of Host
+        - in: query
+          name: cleanerid
+          type: string
+          required: false
+          description: Cleaner ID
+        - in: query
+          name: cleanername
+          type: string
+          required: false
+          description: Cleaner Name
+        - in: query
+          name: cleaneremail
+          type: string
+          required: false
+          description: Cleaner Email Address
+        - in: query
+          name: pin
+          type: string
+          required: false
+          description: Access Pin
+        - in: query
+          name: cleanerpaid
+          type: string
+          required: false
+          description: Cleaner Paid (true)
+        - in: query
+          name: guestname
+          type: string
+          required: false
+          description: Guest Name
+        - in: query
+          name: phonenum
+          type: string
+          required: false
+          description: Phone Number
+        - in: query
+          name: cleanerpaidpaymenttype
+          type: string
+          required: false
+          description: Cleaner Payment Type (cash/check/venmo)
+        - in: query
+          name: cleaning_date
+          type: string
+          required: false
+          description: Cleaning Date
+        - in: query
+          name: checkin
+          type: string
+          required: false
+          description: Check in Date (ex. 2022-10-19%2000:00:00)
+        - in: query
+          name: checkout
+          type: string
+          required: false
+          description: Check out Date (ex. 2022-10-19%2000:00:00)
+        - in: query
+          name: text_bool
+          type: string
+          required: false
+          description: Whether or not to text (true)
+        - in: query
+          name: adults
+          type: integer
+          required: false
+          description: Number of Adults
+        - in: query
+          name: children
+          type: integer
+          required: false
+          description: Number of Children
+        - in: query
+          name: infants
+          type: integer
+          required: false
+          description: Number of Infants
+        - in: query
+          name: nightlyrate
+          type: integer
+          required: false
+          description: Nightly Rate
+      summary: Add a reservation.
+      description: >
+        This operation will add a reservation.
+      operationId: addReservation
+      x-google-backend:
+        address: https://addevent-xmr67kfgoa-uk.a.run.app
+        deadline: 120.0
+
+    #Delete a Reservation
+    delete:
+      tags:
+        - Reservation Management
+      responses:
+        "200":
+          description: OK
+      summary: Cancel a reservation.
+      parameters:
+        - in: query
+          name: uid
+          type: string
+          required: true
+          description: Reservation ID
+      description: >
+        This operation will cancel a reservation.
+      operationId: deleteReservation
+      x-google-backend:
+        address: https://deleteevent-xmr67kfgoa-uk.a.run.app

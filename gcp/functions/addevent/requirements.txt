@@ -1,0 +1,9 @@
+# Function dependencies, for example:
+# package>=version
+
+requests
+google-cloud-storage
+ics
+uuid
+google-cloud-datastore
+pytz

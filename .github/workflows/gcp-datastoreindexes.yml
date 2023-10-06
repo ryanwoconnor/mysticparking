@@ -1,0 +1,53 @@
+name: Deploy Indexes
+on:
+  push:
+    branches:
+      - "*"
+      - "!main"
+    paths:
+      - "gcp/datastore/indexes/*"
+
+jobs:
+  deploy-gcp-datastore-indexes-cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: auth
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: "${{ secrets.gcp_credentials }}"
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v0"
+
+      - id: "deploy"
+        run: >
+          gcloud
+          datastore
+          indexes
+          cleanup
+          "gcp/datastore/indexes/index.yaml"
+          --project=twin-villas
+  deploy-gcp-datastore-indexes-deploy:
+    needs: deploy-gcp-datastore-indexes-cleanup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: auth
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: "${{ secrets.gcp_credentials }}"
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v0"
+
+      - id: "deploy"
+        run: >
+          gcloud
+          datastore
+          indexes
+          create
+          "gcp/datastore/indexes/index.yaml"
+          --project=twin-villas

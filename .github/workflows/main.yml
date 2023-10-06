@@ -1,0 +1,84 @@
+name: Run Checks (Prod)
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+  FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+  FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  prod-tests:
+    name: "Bump Version on main and deploy to Vercel"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout source code"
+        uses: "actions/checkout@v2"
+        with:
+          ref: ${{ github.ref }}
+      - name: Install packages
+        run: yarn install --frozen-lockfile
+      - name: Prettier
+        run: yarn run format
+      - name: Lint
+        run: yarn run lint
+      #- name: Cypress run
+      #  uses: cypress-io/github-action@v4.2.0 # use the explicit version number
+      #  with:
+      #    build: yarn run build
+      #    start: yarn start
+      #    record: true
+      #  env:
+      #    # pass the Dashboard record key as an environment variable
+      #    CYPRESS_RECORD_KEY: d505b302-6cbb-4955-9327-4e139531068a
+
+      #Steps for bumping version
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Automated Version Bump"
+        id: version-bump
+        uses: "phips28/gh-action-bump-version@master"
+        with:
+          tag-prefix: "v"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "cat package.json"
+        run: cat ./package.json
+
+      # Steps for Deploying to Vercel
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      # Steps for Creating Changelog
+      - name: Update CHANGELOG
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ steps.version-bump.outputs.newTag }}
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          draft: false
+          #name: ${{ github.ref_name }}
+          tag: ${{ steps.version-bump.outputs.newTag }}
+          body: ${{ steps.changelog.outputs.changes }}
+          token: ${{ github.token }}
+
+      - name: Commit CHANGELOG.md
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: "docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]"
+          file_pattern: CHANGELOG.md

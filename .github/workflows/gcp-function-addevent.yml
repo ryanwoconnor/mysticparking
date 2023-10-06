@@ -34,3 +34,4 @@ jobs:
           --trigger-http
           --timeout=3600
           --entry-point=getEvents
+          --service-account=mysticparkingservice@mystic-parking.iam.gserviceaccount.com

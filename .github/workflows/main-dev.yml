@@ -6,12 +6,6 @@ env:
   FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
   FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
   NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-  firebaseApiKey: ${{ secrets.firebaseApiKey }}
-  firebaseAppId: ${{ secrets.firebaseAppId }}
-  firebaseAuthDomain: ${{ secrets.firebaseAuthDomain }}
-  firebaseProjectId: ${{ secrets.firebaseProjectId }}
-  firebaseStoreBucket: ${{ secrets.firebaseStoreBucket }}
-  firebaseMessagingSenderId: ${{ secrets.firebaseMessagingSenderId }}
   API_GATEWAY_URL: ${{ secrets.API_GATEWAY_URL }}
 on:
   push:

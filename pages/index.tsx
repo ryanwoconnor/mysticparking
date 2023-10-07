@@ -11,6 +11,11 @@ import StepButton from "@mui/material/StepButton";
 import dayjs from "dayjs";
 import { useSession } from "next-auth/react";
 import moment from "moment";
+import { type DefaultSession } from "next-auth";
+
+interface SessionExtension extends DefaultSession {
+  id_token: string;
+}
 
 // eslint-disable-next-line import/no-unused-modules
 export default function Home() {
@@ -25,7 +30,7 @@ export default function Home() {
   const [step, setStep] = useState(0);
 
   const steps = ["Add Vehicle", "Choose Time", "Pay"];
-  const { data: session } = useSession();
+  const session = useSession().data as SessionExtension;
 
   const handleStep = (step: number) => () => {
     setStep(step);

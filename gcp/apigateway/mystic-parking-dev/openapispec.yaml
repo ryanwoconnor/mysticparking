@@ -555,10 +555,10 @@ paths:
           type: integer
           required: false
           description: Nightly Rate
-      summary: Add a reservation.
+      summary: Add a vehicle.
       description: >
         This operation will add a reservation.
-      operationId: addReservation
+      operationId: addVehicle
       x-google-backend:
         address: https://us-east4-mystic-parking.cloudfunctions.net/addvehicle-dev
         deadline: 120.0

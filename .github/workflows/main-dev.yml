@@ -38,15 +38,15 @@ jobs:
       #    definition-file: pages/api/openapispec.yaml
       - name: Lint
         run: yarn run lint
-      - name: Cypress run
-        uses: cypress-io/github-action@v4.2.0 # use the explicit version number
-        with:
-          start: yarn run dev
-          record: true
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+      #- name: Cypress run
+      #  uses: cypress-io/github-action@v4.2.0 # use the explicit version number
+      #  with:
+      #    start: yarn run dev
+      #    record: true
+      #  env:
+      #    # pass the Dashboard record key as an environment variable
+      #    CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #    CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest

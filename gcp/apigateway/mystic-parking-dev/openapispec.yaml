@@ -460,6 +460,7 @@ paths:
       operationId: deleteReservation
       x-google-backend:
         address: https://deleteevent-dev-xmr67kfgoa-uk.a.run.app
+        deadline: 120.0
 
   /vehicle:
     #Add a reservation

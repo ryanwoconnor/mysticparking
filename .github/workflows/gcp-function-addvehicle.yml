@@ -1,0 +1,37 @@
+name: Deploy GCP Function addvehicle
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "gcp/functions/addvehicle/**"
+
+jobs:
+  deploy-gcp-function-addvehicle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: auth
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: "${{ secrets.gcp_credentials }}"
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v0"
+
+      - id: "deploy"
+        run: >
+          gcloud
+          functions
+          deploy
+          addvehicle
+          --region=us-east4
+          --source=gcp/functions/addvehicle/
+          --runtime=python310
+          --gen2
+          --memory=256MB
+          --trigger-http
+          --timeout=3600
+          --entry-point=getEvents
+          --service-account=mysticparkingservice@mystic-parking.iam.gserviceaccount.com

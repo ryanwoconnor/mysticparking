@@ -153,7 +153,7 @@ securityDefinitions:
     x-google-issuer: https://accounts.google.com
     x-google-jwks_uri: https://www.googleapis.com/oauth2/v3/certs
     # Optional. Replace YOUR-CLIENT-ID with your client ID
-    x-google-audiences: 781967508504-2h6j1ccbhhpb28qdk0bggng3a4jqm9nb.apps.googleusercontent.com
+    x-google-audiences: 223066458988-rh6tjq66espisehd9n9d7o83alc5vepu.apps.googleusercontent.com
 tags:
   - name: Cleaner Management
     description: Everything for managing cleaners
@@ -460,3 +460,106 @@ paths:
       operationId: deleteReservation
       x-google-backend:
         address: https://deleteevent-dev-xmr67kfgoa-uk.a.run.app
+        deadline: 120.0
+
+  /vehicle:
+    #Add a reservation
+    put:
+      tags:
+        - Reservation Management
+      responses:
+        "200":
+          description: OK
+      parameters:
+        - in: query
+          name: email
+          type: string
+          required: true
+          description: Email Address of Host
+        - in: query
+          name: cleanerid
+          type: string
+          required: false
+          description: Cleaner ID
+        - in: query
+          name: cleanername
+          type: string
+          required: false
+          description: Cleaner Name
+        - in: query
+          name: cleaneremail
+          type: string
+          required: false
+          description: Cleaner Email Address
+        - in: query
+          name: pin
+          type: string
+          required: false
+          description: Access Pin
+        - in: query
+          name: cleanerpaid
+          type: string
+          required: false
+          description: Cleaner Paid (true)
+        - in: query
+          name: guestname
+          type: string
+          required: false
+          description: Guest Name
+        - in: query
+          name: phonenum
+          type: string
+          required: false
+          description: Phone Number
+        - in: query
+          name: cleanerpaidpaymenttype
+          type: string
+          required: false
+          description: Cleaner Payment Type (cash/check/venmo)
+        - in: query
+          name: cleaning_date
+          type: string
+          required: false
+          description: Cleaning Date
+        - in: query
+          name: checkin
+          type: string
+          required: false
+          description: Check in Date (ex. 2022-10-19%2000:00:00)
+        - in: query
+          name: checkout
+          type: string
+          required: false
+          description: Check out Date (ex. 2022-10-19%2000:00:00)
+        - in: query
+          name: text_bool
+          type: string
+          required: false
+          description: Whether or not to text (true)
+        - in: query
+          name: adults
+          type: integer
+          required: false
+          description: Number of Adults
+        - in: query
+          name: children
+          type: integer
+          required: false
+          description: Number of Children
+        - in: query
+          name: infants
+          type: integer
+          required: false
+          description: Number of Infants
+        - in: query
+          name: nightlyrate
+          type: integer
+          required: false
+          description: Nightly Rate
+      summary: Add a vehicle.
+      description: >
+        This operation will add a reservation.
+      operationId: addVehicle
+      x-google-backend:
+        address: https://us-east4-mystic-parking.cloudfunctions.net/addvehicle-dev
+        deadline: 120.0

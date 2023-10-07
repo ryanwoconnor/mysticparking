@@ -12,10 +12,6 @@ definitions:
   Reservation:
     type: object
     properties:
-      airbnbconfirmationcode:
-        example: "HMQFHTRQ2T"
-        type: string
-        description: UID of Reservation
       backfill:
         example: "false"
         type: string

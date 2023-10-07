@@ -28,7 +28,7 @@ jobs:
           indexes
           cleanup
           "gcp/datastore/indexes/index.yaml"
-          --project=twin-villas
+          --project=mystic-parking
   deploy-gcp-datastore-indexes-deploy:
     needs: deploy-gcp-datastore-indexes-cleanup
     runs-on: ubuntu-latest
@@ -50,4 +50,4 @@ jobs:
           indexes
           create
           "gcp/datastore/indexes/index.yaml"
-          --project=twin-villas
+          --project=mystic-parking

@@ -17,8 +17,6 @@ def getEvents(request):
     email = ""
     guestname = ""
     guestid = ""
-    checkin = ""
-    checkout = ""
     airbnbid = ""
     phonenum = ""
     nightlyrate = ""
@@ -62,14 +60,7 @@ def getEvents(request):
             if request_args and "phonenum" in request_args:
                 phonenum = str(request_args["phonenum"])
 
-            if request_args and "checkout" in request_args:
-                checkout_str = str(request_args["checkout"])
-                checkout = datetime.datetime.strptime(checkout_str, "%Y-%m-%d %H:%M:%S")
-
-            if request_args and "checkin" in request_args:
-                checkin_str = str(request_args["checkin"])
-                checkin = datetime.datetime.strptime(checkin_str, "%Y-%m-%d %H:%M:%S")
-
+           
             timestr = datetime.datetime.now().replace(microsecond=0)
 
             print("Creating new Reservation")
@@ -77,22 +68,10 @@ def getEvents(request):
             new_uuid = str(uuid.uuid1())
             print("New UUID is " + new_uuid)
 
-            # Configuring Start Date
-            checkin = datetime.datetime(
-                checkin.year, checkin.month, checkin.day, 0, 0, 0, tzinfo=timezone("EST")
-            )
-
-            # Configuring End Date
-            checkout = datetime.datetime(
-                checkout.year, checkout.month, checkout.day, 0, 0, 0, tzinfo=timezone("EST")
-            )
-
+          
             new_reservation = {
                 "uid": new_uuid,
                 "status": "Reserved",
-                "end_date": checkout,
-                "cleaning_date": checkout,
-                "start_date": checkin,
                 "created_date": timestr,
                 "created_by": orig_email,
                 "booked": timestr,

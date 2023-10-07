@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - "*"
-    paths:
-      - "gcp/artifactregistry/delete_policy.json"
 
 jobs:
   deploy-artifactregistry-mystic-parking:

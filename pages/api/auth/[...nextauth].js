@@ -276,7 +276,7 @@ const options = {
           return token;
         } else {
           console.log(
-            "Current time is greater than expiration time, refreshing"
+            "Current time is greater than expiration time, refreshing",
           );
 
           return refreshAccessToken(token, user);

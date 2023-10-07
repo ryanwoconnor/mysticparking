@@ -30,96 +30,96 @@ export default withAuth(
         const env = process.env.NODE_ENV;
         if (env == "development") {
           return NextResponse.rewrite(
-            new URL("http://localhost:3000" + "/auth/signin")
+            new URL("http://localhost:3000" + "/auth/signin"),
           );
         } else if (env == "production") {
           return NextResponse.rewrite(
-            new URL("https://cleanershare.com" + "/auth/signin")
+            new URL("https://cleanershare.com" + "/auth/signin"),
           );
         }
       }
     }
     if (request.nextUrl.pathname === "/vehicle") {
       return NextResponse.rewrite(
-        new URL(newURL + "/vehicle" + request.nextUrl.search)
+        new URL(newURL + "/vehicle" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/api/vehicle") {
       return NextResponse.rewrite(
-        new URL(newURL + "/vehicle" + request.nextUrl.search)
+        new URL(newURL + "/vehicle" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/guest")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/guest" + request.nextUrl.search)
+        new URL(newURL + "/guest" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/api/guest")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/guest" + request.nextUrl.search)
+        new URL(newURL + "/guest" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/websiteauditlog")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/websiteauditlog" + request.nextUrl.search)
+        new URL(newURL + "/websiteauditlog" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/api/websiteauditlog")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/websiteauditlog" + request.nextUrl.search)
+        new URL(newURL + "/websiteauditlog" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/cohost")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/cohost" + request.nextUrl.search)
+        new URL(newURL + "/cohost" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/api/cohost")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/cohost" + request.nextUrl.search)
+        new URL(newURL + "/cohost" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/host")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/host" + request.nextUrl.search)
+        new URL(newURL + "/host" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/api/host")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/host" + request.nextUrl.search)
+        new URL(newURL + "/host" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/activeusers")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/activeusers" + request.nextUrl.search)
+        new URL(newURL + "/activeusers" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/api/activeusers")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/activeusers" + request.nextUrl.search)
+        new URL(newURL + "/activeusers" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/reservation")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/reservation" + request.nextUrl.search)
+        new URL(newURL + "/reservation" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/api/reservation")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/reservation" + request.nextUrl.search)
+        new URL(newURL + "/reservation" + request.nextUrl.search),
       );
     }
 
@@ -127,85 +127,85 @@ export default withAuth(
       console.log("FOUND LISTING PATH NO API");
 
       return NextResponse.rewrite(
-        new URL(newURL + "/listing" + request.nextUrl.search)
+        new URL(newURL + "/listing" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/api/listing") {
       console.log("FOUND LISTING PATH");
       return NextResponse.rewrite(
-        new URL(newURL + "/listing" + request.nextUrl.search)
+        new URL(newURL + "/listing" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/checksamedaycheckins") {
       return NextResponse.rewrite(
-        new URL(newURL + "/checksamedaycheckins" + request.nextUrl.search)
+        new URL(newURL + "/checksamedaycheckins" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/api/checksamedaycheckins") {
       return NextResponse.rewrite(
-        new URL(newURL + "/checksamedaycheckins" + request.nextUrl.search)
+        new URL(newURL + "/checksamedaycheckins" + request.nextUrl.search),
       );
     }
     if (request.nextUrl.pathname.startsWith("/api/task")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/task" + request.nextUrl.search)
+        new URL(newURL + "/task" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/task") {
       return NextResponse.rewrite(
-        new URL(newURL + "/task" + request.nextUrl.search)
+        new URL(newURL + "/task" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/api/thermostat") {
       return NextResponse.rewrite(
-        new URL(newURL + "/thermostat" + request.nextUrl.search)
+        new URL(newURL + "/thermostat" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/thermostat") {
       return NextResponse.rewrite(
-        new URL(newURL + "/thermostat" + request.nextUrl.search)
+        new URL(newURL + "/thermostat" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/api/thermostatids") {
       return NextResponse.rewrite(
-        new URL(newURL + "/thermostatids" + request.nextUrl.search)
+        new URL(newURL + "/thermostatids" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/thermostatids") {
       return NextResponse.rewrite(
-        new URL(newURL + "/thermostatids" + request.nextUrl.search)
+        new URL(newURL + "/thermostatids" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname.startsWith("/api/doorevents")) {
       return NextResponse.rewrite(
-        new URL(newURL + "/doorevents" + request.nextUrl.search)
+        new URL(newURL + "/doorevents" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/doorevents") {
       return NextResponse.rewrite(
-        new URL(newURL + "/doorevents" + request.nextUrl.search)
+        new URL(newURL + "/doorevents" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/api/note") {
       return NextResponse.rewrite(
-        new URL(newURL + "/note" + request.nextUrl.search)
+        new URL(newURL + "/note" + request.nextUrl.search),
       );
     }
 
     if (request.nextUrl.pathname === "/note") {
       return NextResponse.rewrite(
-        new URL(newURL + "/note" + request.nextUrl.search)
+        new URL(newURL + "/note" + request.nextUrl.search),
       );
     }
   },
@@ -234,7 +234,7 @@ export default withAuth(
         signIn: "auth/signin",
       },
     },
-  }
+  },
 );
 
 export const config = {

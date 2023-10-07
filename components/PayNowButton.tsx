@@ -26,7 +26,7 @@ function createOrder() {
           },
         ],
       }),
-    }
+    },
   )
     .then((response) => response.json())
     .then((order) => {
@@ -44,7 +44,7 @@ function onApprove() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({}),
-    }
+    },
   )
     .then((response) => response.json())
     .then(() => {

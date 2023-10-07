@@ -88,6 +88,24 @@ export default function Home() {
                 fullWidth
                 onClick={() => {
                   setStep(1);
+
+                  fetch("/vehicle", {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: "Bearer " + session.id_token,
+                    },
+                  })
+                    .then((response) => {
+                      if (response.ok) {
+                        return response;
+                      } else {
+                        throw new Error("Error");
+                      }
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
                 }}
                 disabled={
                   make == "" ||

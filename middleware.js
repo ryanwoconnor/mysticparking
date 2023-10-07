@@ -39,15 +39,15 @@ export default withAuth(
         }
       }
     }
-    if (request.nextUrl.pathname === "/cleaner") {
+    if (request.nextUrl.pathname === "/vehicle") {
       return NextResponse.rewrite(
-        new URL(newURL + "/cleaner" + request.nextUrl.search)
+        new URL(newURL + "/vehicle" + request.nextUrl.search)
       );
     }
 
-    if (request.nextUrl.pathname === "/api/cleaner") {
+    if (request.nextUrl.pathname === "/api/vehicle") {
       return NextResponse.rewrite(
-        new URL(newURL + "/cleaner" + request.nextUrl.search)
+        new URL(newURL + "/vehicle" + request.nextUrl.search)
       );
     }
 

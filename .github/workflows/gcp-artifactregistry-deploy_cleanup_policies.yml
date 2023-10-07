@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - "*"
+    paths:
+      - "gcp/artifactregistry/delete_policy.json"
 
 jobs:
   deploy-artifactregistry-mystic-parking:
@@ -29,7 +31,7 @@ jobs:
           repositories
           set-cleanup-policies
           gcf-artifacts
-          --project=twin-villas
+          --project=mystic-parking
           --location=us-east4
           --policy=gcp/artifactregistry/delete_policy.json
           --no-dry-run

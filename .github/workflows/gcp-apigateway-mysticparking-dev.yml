@@ -34,7 +34,7 @@ jobs:
           mystic-parking-dev-config-${{ steps.date.outputs.date }}
           --api=mystic-parking
           --openapi-spec=gcp/apigateway/mystic-parking-dev/openapispec.yaml
-          --project=twin-villas
+          --project=mystic-parking
       - id: "deploy_config"
         run: >
           gcloud
@@ -45,4 +45,4 @@ jobs:
           --api=mystic-parking
           --api-config=mystic-parking-dev-config-${{ steps.date.outputs.date }}
           --location=us-east4
-          --project=twin-villas
+          --project=mystic-parking

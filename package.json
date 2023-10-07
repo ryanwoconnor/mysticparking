@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --fix --ext .js,.jsx .",
+    "format": "prettier --check \"{,!(node_modules)/**/}*.js\"",
+    "format:fix": "prettier --write \"{,!(node_modules)/**/}*.js\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

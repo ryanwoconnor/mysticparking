@@ -34,6 +34,17 @@ jobs:
           --api=mystic-parking
           --openapi-spec=gcp/apigateway/mystic-parking/openapispec.yaml
           --project=mystic-parking
+      - id: "create_gateway"
+        run: >
+          gcloud
+          api-gateway
+          gateways
+          create
+          mystic-parkinggateway
+          --api=mystic-parking
+          --api-config=mystic-parking-config-${{ steps.date.outputs.date }}
+          --project=mystic-parking
+          --location=us-east4
       - id: "deploy_config"
         run: >
           gcloud
